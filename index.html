@@ -26,8 +26,18 @@
     <div id="player-modal" class="modal">
       <div class="modal-content">
         <h2>Enter Player Names</h2>
-        <input type="text" id="player1-name" placeholder="Player 1 Name" />
-        <input type="text" id="player2-name" placeholder="Player 2 Name" />
+        <input
+          type="text"
+          id="player1-name"
+          placeholder="Player 1 Name"
+          required
+        />
+        <input
+          type="text"
+          id="player2-name"
+          placeholder="Player 2 Name"
+          required
+        />
         <button id="start-game">Start Game</button>
       </div>
     </div>
@@ -61,5 +71,6 @@
       </div>
     </div>
     <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
   </body>
 </html>

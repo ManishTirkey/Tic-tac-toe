@@ -159,8 +159,15 @@ body {
   margin-top: 20px;
 }
 
+.board:has(div.player, div.winner) {
+  font-family: "Orbitron", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
 .cell {
-  background-color: #61dafb;
+  background-color: #567b85;
   border: 2px solid #3a3f47;
   border-radius: 5px;
   width: 100px;
@@ -174,15 +181,48 @@ body {
 }
 
 .cell:hover {
-  background-color: #21a1f1;
+  background-color: #6990a8;
 }
 
 .winner {
-  background-color: #28a745;
+  background-color: "#5fa55f";
 }
 
 .loser {
-  background-color: #dc3545;
+  background-color: "#e54872";
+}
+
+.Green {
+  color: "#5fa55f";
+}
+
+.Red {
+  color: "#e54872";
+}
+
+.bg-green {
+  color: "#5fa55f";
+}
+
+.bg-red {
+  color: "#e54872";
+}
+
+.board .winner_color {
+  color: #5fa55f;
+}
+
+.board .losser_color {
+  color: #e54872;
+}
+
+.board .winner {
+  font-size: 1.8em;
+  color: #5fa55f;
+}
+
+.board .winner-board {
+  font-size: 1.8em;
 }
 
 #play-again {

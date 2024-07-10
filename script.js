@@ -11,7 +11,9 @@ function initGame() {
   console.log("Initializing game...");
   document.getElementById("start-game").addEventListener("click", startGame);
   document.getElementById("end-game").addEventListener("click", endGame);
-  document.getElementById("play-again").addEventListener("click", resetGame);
+  document.getElementById("play-again").addEventListener("click", () => {
+    window.location.reload(true);
+  });
   document
     .querySelectorAll(".cell")
     .forEach((cell) => cell.addEventListener("click", handleCellClick));
@@ -147,7 +149,8 @@ function checkWin() {
 function endGame() {
   gameActive = false;
   displayFinalScores();
-  showConfetti();
+  if (player1.score !== player2.score) showConfetti();
+
   document.querySelectorAll(".cell").forEach((cell) => {
     if (cell.textContent === currentPlayer.symbol) {
       cell.classList.add("winner");
@@ -159,28 +162,58 @@ function endGame() {
 
 // Function to display final scores and winner
 function displayFinalScores() {
-  let winner = player1.score > player2.score ? player1 : player2;
-  document.getElementById("board").innerHTML = `
-        <div>${player1.name}: ${player1.score}</div>
-        <div>${player2.name}: ${player2.score}</div>
-        <div>WINNER IS: ${winner.name}</div>
-    `;
+  const draw = player1.score === player2.score ? "draw" : "win";
+
+  if (draw === "win") {
+    let winner = player1.score > player2.score ? player1 : player2;
+
+    const Winner = (document.getElementById("board").innerHTML = `
+        <div class="player player-1 ${
+          player1.name === winner.name ? "winner_color" : "losser_color"
+        }">
+        ${player1.name}: ${player1.score}
+        </div>
+
+        <div class="player player-2 ${
+          player2.name === winner.name ? "winner_color" : "losser_color"
+        }">
+        ${player2.name}: ${player2.score}
+        </div>
+        <div class="winner-board winner">WINNER ${winner.name}</div>
+    `);
+  } else {
+    const Draw = (document.getElementById("board").innerHTML = `
+        <div class="player player-1">
+        ${player1.name}: ${player1.score}
+        </div>
+
+        <div class="player player-2">
+        ${player2.name}: ${player2.score}
+        </div>
+        <div class="winner-board">Match Draw</div>
+    `);
+  }
   document.querySelector(".scoreboard").remove();
   document.getElementById("play-again").style.display = "block";
 }
 
 // Function to show confetti
 function showConfetti() {
-  const confettiCount = 100;
-  for (let i = 0; i < confettiCount; i++) {
-    const confetti = document.createElement("div");
-    confetti.classList.add("confetti");
-    confetti.style.left = Math.random() * 100 + "vw";
-    confetti.style.backgroundColor =
-      i % 2 === 0 ? "red" : i % 3 === 0 ? "green" : "yellow";
-    document.body.appendChild(confetti);
-    setTimeout(() => confetti.remove(), 5000);
-  }
+  confetti({
+    particleCount: 100,
+    spread: 70,
+    origin: { y: 0.6 },
+  });
+  confetti({
+    particleCount: 100,
+    spread: 70,
+    origin: { y: 0.6 },
+  });
+  confetti({
+    particleCount: 100,
+    spread: 70,
+    origin: { y: 0.6 },
+  });
 }
 
 // Function to update scores on the server
@@ -208,16 +241,19 @@ function updateScoreColors() {
   let playerXdisplay = document.getElementById("playerXdisplay");
   let playerOdisplay = document.getElementById("playerOdisplay");
 
+  const green = "#5fa55f";
+  const red = "#e54872";
+
   if (player1.score > player2.score) {
-    player1ScoreEl.style.color = "green";
-    player2ScoreEl.style.color = "red";
-    playerXdisplay.style.color = "green";
-    playerOdisplay.style.color = "red";
+    player1ScoreEl.style.color = green;
+    player2ScoreEl.style.color = red;
+    playerXdisplay.style.color = green;
+    playerOdisplay.style.color = red;
   } else if (player2.score > player1.score) {
-    player1ScoreEl.style.color = "red";
-    player2ScoreEl.style.color = "green";
-    playerXdisplay.style.color = "red";
-    playerOdisplay.style.color = "green";
+    player1ScoreEl.style.color = red;
+    player2ScoreEl.style.color = green;
+    playerXdisplay.style.color = red;
+    playerOdisplay.style.color = green;
   } else {
     player1ScoreEl.style.color = "white";
     player2ScoreEl.style.color = "white";
@@ -247,52 +283,6 @@ function resetBoard() {
   });
   currentPlayer = player1;
   updateCurrentTurn();
-}
-
-// Function to reset the game
-function resetGame() {
-  player1 = { name: "", symbol: "X", score: 0 };
-  player2 = { name: "", symbol: "O", score: 0 };
-  currentPlayer = player1;
-  board = ["", "", "", "", "", "", "", "", ""];
-  gameActive = true;
-  rounds = 1;
-  document.getElementById("round-number").textContent = `Round: ${rounds}`;
-  document.getElementById("play-again").style.display = "none";
-  document.querySelector(".container").innerHTML = `
-    <div class="scoreboard">
-      <button id="end-game">End Game</button>
-      <div id="round-number">Round: 1</div>
-      <div id="player1-score" class="player-score">Player 1 [X]: 0</div>
-      <div id="player2-score" class="player-score">Player 2 [O]: 0</div>
-      <div id="current-turn">Current Turn: Player 1 [X]</div>
-    </div>
-    <div class="game-board">
-      <h1>Tic-Tac-Toe</h1>
-      <h2 id="player-names">
-        <span id="playerXdisplay">X</span>
-        <span class="vs">Vs</span>
-        <span id="playerOdisplay">O</span>
-      </h2>
-      <div id="board" class="board">
-        <div class="cell" data-index="0"></div>
-        <div class="cell" data-index="1"></div>
-        <div class="cell" data-index="2"></div>
-        <div class="cell" data-index="3"></div>
-        <div class="cell" data-index="4"></div>
-        <div class="cell" data-index="5"></div>
-        <div class="cell" data-index="6"></div>
-        <div class="cell" data-index="7"></div>
-        <div class="cell" data-index="8"></div>
-      </div>
-      <button id="play-again" style="display: none;">PLAY AGAIN</button>
-    </div>
-  `;
-  document.getElementById("end-game").addEventListener("click", endGame);
-  document.getElementById("play-again").addEventListener("click", resetGame);
-  document
-    .querySelectorAll(".cell")
-    .forEach((cell) => cell.addEventListener("click", handleCellClick));
 }
 
 // Initialize the game on window load
