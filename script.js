@@ -4,7 +4,7 @@ let player2 = { name: "", symbol: "O", score: 0 };
 let currentPlayer = player1;
 let board = ["", "", "", "", "", "", "", "", ""];
 let gameActive = true;
-let rounds = 0;
+let rounds = 1;
 
 // Function to initialize the game
 function initGame() {
@@ -90,6 +90,7 @@ function updateScoreboard() {
   document.getElementById(
     "player2-score"
   ).textContent = `${player2.name} [O]: ${player2.score}`;
+  updateScoreColors();
 }
 
 // Function to update current turn display
@@ -113,11 +114,14 @@ function handleWin() {
       cell.classList.add("loser");
     }
   });
+  updateRounds();
 }
 
 // Function to handle draw
 function handleDraw() {
   gameActive = false;
+  showConfetti();
+  updateRounds();
 }
 
 // Function to check win
@@ -164,8 +168,16 @@ function displayFinalScores() {
 
 // Function to show confetti
 function showConfetti() {
-  // Placeholder for confetti animation
-  console.log("Confetti animation here");
+  const confettiCount = 100;
+  for (let i = 0; i < confettiCount; i++) {
+    const confetti = document.createElement("div");
+    confetti.classList.add("confetti");
+    confetti.style.left = Math.random() * 100 + "vw";
+    confetti.style.backgroundColor =
+      i % 2 === 0 ? "red" : i % 3 === 0 ? "green" : "yellow";
+    document.body.appendChild(confetti);
+    setTimeout(() => confetti.remove(), 5000);
+  }
 }
 
 // Function to update scores on the server
@@ -184,6 +196,54 @@ function updateScoresOnServer(player) {
     .then((response) => response.json())
     .then((data) => console.log("Score updated:", data))
     .catch((error) => console.error("Error updating score:", error));
+}
+
+// Function to update score colors
+function updateScoreColors() {
+  let player1ScoreEl = document.getElementById("player1-score");
+  let player2ScoreEl = document.getElementById("player2-score");
+  let playerXdisplay = document.getElementById("playerXdisplay");
+  let playerOdisplay = document.getElementById("playerOdisplay");
+
+  if (player1.score > player2.score) {
+    player1ScoreEl.style.color = "green";
+    player2ScoreEl.style.color = "red";
+    playerXdisplay.style.color = "green";
+    playerOdisplay.style.color = "red";
+  } else if (player2.score > player1.score) {
+    player1ScoreEl.style.color = "red";
+    player2ScoreEl.style.color = "green";
+    playerXdisplay.style.color = "red";
+    playerOdisplay.style.color = "green";
+  } else {
+    player1ScoreEl.style.color = "white";
+    player2ScoreEl.style.color = "white";
+    playerXdisplay.style.color = "white";
+    playerOdisplay.style.color = "white";
+  }
+}
+
+// Function to update round number
+function updateRounds() {
+  rounds++;
+  document.getElementById("round-number").textContent = `Round: ${rounds}`;
+  if (rounds <= 3) {
+    resetBoard();
+  } else {
+    endGame();
+  }
+}
+
+// Function to reset the board
+function resetBoard() {
+  board = ["", "", "", "", "", "", "", "", ""];
+  gameActive = true;
+  document.querySelectorAll(".cell").forEach((cell) => {
+    cell.textContent = "";
+    cell.classList.remove("winner", "loser");
+  });
+  currentPlayer = player1;
+  updateCurrentTurn();
 }
 
 // Initialize the game on window load

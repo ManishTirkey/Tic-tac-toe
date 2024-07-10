@@ -104,25 +104,16 @@ body {
   background-color: #e04350;
 }
 
+.scoreboard #round-number {
+  margin-bottom: 10px;
+  font-size: 1.4em;
+  color: #61dafb;
+}
+
 .scoreboard:has(div) {
-  /* font-family: "Orbitron", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 700;
-  font-style: normal; */
-
-  /* font-family: "Concert One", sans-serif;
-  font-weight: 400;
-  font-style: normal; */
-
-  /* font-family: "Orbitron", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 700;
-  font-style: normal; */
-
   font-family: "Bebas Neue", sans-serif;
   font-weight: 400;
   font-style: normal;
-
   letter-spacing: 1px;
 }
 
@@ -145,7 +136,6 @@ body {
 .game-board h1 {
   color: #61dafb;
   margin: 0;
-
   font-family: "Orbitron", sans-serif;
   font-optical-sizing: auto;
   font-weight: 700;
@@ -193,6 +183,34 @@ body {
 
 .loser {
   background-color: #dc3545;
+}
+
+/* Confetti styles */
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(0) rotateZ(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotateZ(360deg);
+    opacity: 0;
+  }
+}
+
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: #61dafb;
+  animation: confetti-fall 5s linear infinite;
+}
+
+.red {
+  background-color: red;
+}
+
+.green {
+  background-color: green;
 }
 
 /* Responsive Design */
