@@ -185,6 +185,20 @@ body {
   background-color: #dc3545;
 }
 
+#play-again {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #61dafb;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#play-again:hover {
+  background-color: #21a1f1;
+}
+
 /* Confetti styles */
 @keyframes confetti-fall {
   0% {

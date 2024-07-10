@@ -11,6 +11,7 @@ function initGame() {
   console.log("Initializing game...");
   document.getElementById("start-game").addEventListener("click", startGame);
   document.getElementById("end-game").addEventListener("click", endGame);
+  document.getElementById("play-again").addEventListener("click", resetGame);
   document
     .querySelectorAll(".cell")
     .forEach((cell) => cell.addEventListener("click", handleCellClick));
@@ -164,6 +165,8 @@ function displayFinalScores() {
         <div>${player2.name}: ${player2.score}</div>
         <div>WINNER IS: ${winner.name}</div>
     `;
+  document.querySelector(".scoreboard").remove();
+  document.getElementById("play-again").style.display = "block";
 }
 
 // Function to show confetti
@@ -244,6 +247,52 @@ function resetBoard() {
   });
   currentPlayer = player1;
   updateCurrentTurn();
+}
+
+// Function to reset the game
+function resetGame() {
+  player1 = { name: "", symbol: "X", score: 0 };
+  player2 = { name: "", symbol: "O", score: 0 };
+  currentPlayer = player1;
+  board = ["", "", "", "", "", "", "", "", ""];
+  gameActive = true;
+  rounds = 1;
+  document.getElementById("round-number").textContent = `Round: ${rounds}`;
+  document.getElementById("play-again").style.display = "none";
+  document.querySelector(".container").innerHTML = `
+    <div class="scoreboard">
+      <button id="end-game">End Game</button>
+      <div id="round-number">Round: 1</div>
+      <div id="player1-score" class="player-score">Player 1 [X]: 0</div>
+      <div id="player2-score" class="player-score">Player 2 [O]: 0</div>
+      <div id="current-turn">Current Turn: Player 1 [X]</div>
+    </div>
+    <div class="game-board">
+      <h1>Tic-Tac-Toe</h1>
+      <h2 id="player-names">
+        <span id="playerXdisplay">X</span>
+        <span class="vs">Vs</span>
+        <span id="playerOdisplay">O</span>
+      </h2>
+      <div id="board" class="board">
+        <div class="cell" data-index="0"></div>
+        <div class="cell" data-index="1"></div>
+        <div class="cell" data-index="2"></div>
+        <div class="cell" data-index="3"></div>
+        <div class="cell" data-index="4"></div>
+        <div class="cell" data-index="5"></div>
+        <div class="cell" data-index="6"></div>
+        <div class="cell" data-index="7"></div>
+        <div class="cell" data-index="8"></div>
+      </div>
+      <button id="play-again" style="display: none;">PLAY AGAIN</button>
+    </div>
+  `;
+  document.getElementById("end-game").addEventListener("click", endGame);
+  document.getElementById("play-again").addEventListener("click", resetGame);
+  document
+    .querySelectorAll(".cell")
+    .forEach((cell) => cell.addEventListener("click", handleCellClick));
 }
 
 // Initialize the game on window load
