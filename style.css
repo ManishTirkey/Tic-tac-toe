@@ -1,0 +1,221 @@
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #282c34;
+  color: #ffffff;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  max-width: 1200px;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #3a3f47;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-content {
+  background-color: #3a3f47;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  color: #61dafb;
+}
+
+.modal-content input {
+  margin: 10px 0;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  width: 80%;
+  box-sizing: border-box;
+}
+
+.modal-content button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #61dafb;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.modal-content button:hover {
+  background-color: #21a1f1;
+}
+
+.scoreboard {
+  align-self: start;
+  background-color: #444b56;
+  border: 1px solid #cccccc;
+  padding: 20px;
+  margin-right: 20px;
+  border-radius: 10px;
+  width: 300px;
+  box-sizing: border-box;
+}
+
+.scoreboard .player-score {
+  margin: 10px 0;
+}
+
+.scoreboard #end-game {
+  margin-bottom: 20px;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  background-color: #ff4b5c;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.scoreboard #end-game:hover {
+  background-color: #e04350;
+}
+
+.scoreboard:has(div) {
+  /* font-family: "Orbitron", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal; */
+
+  /* font-family: "Concert One", sans-serif;
+  font-weight: 400;
+  font-style: normal; */
+
+  /* font-family: "Orbitron", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal; */
+
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+
+  letter-spacing: 1px;
+}
+
+.scoreboard #current-turn {
+  margin-top: 3em;
+  font-size: 1.6em;
+}
+
+.game-board {
+  background-color: #444b56;
+  border: 1px solid #cccccc;
+  padding: 20px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.game-board h1 {
+  color: #61dafb;
+  margin: 0;
+
+  font-family: "Orbitron", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.game-board h2 {
+  font-family: "Concert One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.game-board .vs {
+  font-size: 2em;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.cell {
+  background-color: #61dafb;
+  border: 2px solid #3a3f47;
+  border-radius: 5px;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cell:hover {
+  background-color: #21a1f1;
+}
+
+.winner {
+  background-color: #28a745;
+}
+
+.loser {
+  background-color: #dc3545;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .scoreboard {
+    margin-bottom: 20px;
+    margin-right: 0;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .game-board {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .cell {
+    width: 80px;
+    height: 80px;
+  }
+}

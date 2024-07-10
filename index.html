@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tic-Tac-Toe Game</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="player-modal" class="modal">
+      <div class="modal-content">
+        <h2>Enter Player Names</h2>
+        <input type="text" id="player1-name" placeholder="Player 1 Name" />
+        <input type="text" id="player2-name" placeholder="Player 2 Name" />
+        <button id="start-game">Start Game</button>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="scoreboard">
+        <button id="end-game">End Game</button>
+        <div id="player1-score" class="player-score">Player 1 [X]: 0</div>
+        <div id="player2-score" class="player-score">Player 2 [O]: 0</div>
+        <div id="current-turn">Current Turn: Player 1 [X]</div>
+      </div>
+      <div class="game-board">
+        <h1>Tic-Tac-Toe</h1>
+        <h2 id="player-names">
+          <span id="playerXdisplay">X</span>
+          <span class="vs">Vs</span>
+          <span id="playerOdisplay">O</span>
+        </h2>
+        <div id="board" class="board">
+          <div class="cell" data-index="0"></div>
+          <div class="cell" data-index="1"></div>
+          <div class="cell" data-index="2"></div>
+          <div class="cell" data-index="3"></div>
+          <div class="cell" data-index="4"></div>
+          <div class="cell" data-index="5"></div>
+          <div class="cell" data-index="6"></div>
+          <div class="cell" data-index="7"></div>
+          <div class="cell" data-index="8"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
