@@ -1,3 +1,11 @@
+
+## [Preview in github Pages](https://manishtirkey.github.io/Tic-tac-toe/index.html)
+
+![](./Screenshot4.jpg)
+![](./Screenshot3.jpg)
+![](./Screenshot2.jpg)
+![](./Screenshot1.jpg)
+
 # Tic-tac-toe Game
 
 > ### Steps to start server
